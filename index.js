@@ -1,6 +1,16 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
+mongoose.connect('mongodb+srv://usuarioComum:KCADANiQ2t3gUXhL@cluster0.4fjk1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology:true})
+mongoose.Promise = global.Promise
+try{
+    let db = mongoose.connection
+    db.on('errr', console.error.bind(console,'erro de conexao no banco'))
+} catch (e){
+    console.log(e)
+}
+
+
 const app = express();
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
