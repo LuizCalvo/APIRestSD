@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
+const tarefa_controller = require('./tarefas-controller')
+
 mongoose.connect('mongodb+srv://usuarioComum:KCADANiQ2t3gUXhL@cluster0.4fjk1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology:true})
 mongoose.Promise = global.Promise
 try{
@@ -10,17 +12,33 @@ try{
     console.log(e)
 }
 
+const router = express.Router()
 
 const app = express();
+
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+
+
 
 app.get('/',(req,res) => {
     res.send('teste');
 })
+
+router.post('/tarefas',tarefa_controller.cadastrarTarefa)
+router.get('/tarefas',tarefa_controller.listarTarefas)
+router.get('/tarefas/:id',tarefa_controller.buscarTarefa)
+
+app.use('/',router)
 
 let porta = process.env.PORT ||3000
 
 app.listen(porta,() => {
     console.log("servidor em execução na porta" + porta);
 })
+
+
+
+
+
+
