@@ -17,6 +17,7 @@ exports.cadastrarTarefa = function(req,res){
     res.send('Tarefa cadastrada com sucesso!')
 }
 
+
 exports.listarTarefas = function(req,res){
     Tarefas.find({},function(err,tarefas){
         if(err) return next(err)
@@ -26,6 +27,20 @@ exports.listarTarefas = function(req,res){
 
 exports.buscarTarefa = function(req,res){
     Tarefas.findById(req.params.id,function(err,tarefas){
+        if(err) return next(err)
+        return res.json(tarefas);
+    })
+}
+
+exports.deletarTarefa = function(req,res){
+    Tarefas.findOneAndDelete(req.params.id,function(err,tarefas){
+        if(err) return next(err)
+        return res.json(tarefas);
+    })
+}
+
+exports.atualizarTarefa = function(req,res){
+    Tarefas.findOneAndUpdate(req.params.id,req.body,function(err,tarefas){
         if(err) return next(err)
         return res.json(tarefas);
     })

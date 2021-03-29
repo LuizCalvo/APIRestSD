@@ -25,11 +25,15 @@ app.get('/',(req,res) => {
     res.send('teste');
 })
 
+app.use('/',router)
+
 router.post('/tarefas',tarefa_controller.cadastrarTarefa)
 router.get('/tarefas',tarefa_controller.listarTarefas)
 router.get('/tarefas/:id',tarefa_controller.buscarTarefa)
+router.delete('/tarefas/:id',tarefa_controller.deletarTarefa)
+router.put('/tarefas/:id',tarefa_controller.atualizarTarefa)
 
-app.use('/',router)
+
 
 let porta = process.env.PORT ||3000
 
