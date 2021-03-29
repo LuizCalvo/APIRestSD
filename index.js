@@ -22,7 +22,7 @@ app.use(express.json());
 
 
 app.get('/',(req,res) => {
-    res.send('teste');
+    res.send('Bem vindo ao servico de tarefas!');
 })
 
 app.use('/',router)
