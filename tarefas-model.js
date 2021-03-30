@@ -7,4 +7,5 @@ let TarefaSchema = new Schema({
     completa: {type: Boolean, required: false}
 })
 
+mongoose.set('useFindAndModify', false);
 module.exports = mongoose.model("Tarefas",TarefaSchema)

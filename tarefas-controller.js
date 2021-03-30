@@ -33,14 +33,14 @@ exports.buscarTarefa = function(req,res){
 }
 
 exports.deletarTarefa = function(req,res){
-    Tarefas.findOneAndDelete(req.params.id,function(err,tarefas){
+    Tarefas.findOneAndDelete({_id:req.params.id},function(err,tarefas){
         if(err) return next(err)
         return res.json(tarefas);
     })
 }
 
 exports.atualizarTarefa = function(req,res){
-    Tarefas.findAndModify(req.params.id,req.body,function(err,tarefas){
+    Tarefas.findOneAndUpdate({_id:req.params.id},{$set:{descricao:req.body.descricao,prazo:req.body.prazo,completa: req.body.completa}},function(err,tarefas){
         if(err) return next(err)
         return res.json(tarefas);
     })
