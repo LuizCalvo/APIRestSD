@@ -40,7 +40,7 @@ exports.deletarTarefa = function(req,res){
 }
 
 exports.atualizarTarefa = function(req,res){
-    Tarefas.findOneAndUpdate(req.params.id,req.body,function(err,tarefas){
+    Tarefas.findAndModify(req.params.id,req.body,function(err,tarefas){
         if(err) return next(err)
         return res.json(tarefas);
     })
